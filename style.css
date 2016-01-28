@@ -1,0 +1,11 @@
+#editor {
+  background-color: #EEEEEE;
+
+  /* border-width: 2px; */
+  border-color: blue;
+  border-style: solid;
+}
+
+.wrong {
+  background-color: #EEAAAA;
+}

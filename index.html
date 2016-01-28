@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <h1>Hello world!</h1>
+
+    <div align="right">
+      <button id="add" class="btn">
+        Add to dict
+      </button>
+
+      <button id="add" class="btn">
+        Next bad word
+      </button>
+
+      <button id="foo" class="btn btn-primary">
+        check!
+      </button>
+    </div>
+
+    <div class="row">
+      <div id="editor" spellcheck="false" contenteditable="true" class="col-md-8">
+        This is sme text.
+      </div>
+
+      <div id="sidebar" class="col-md-4">
+        <div class="row">
+          <h2 class="big">Dict content!</h2>
+          <div id="dict content"> </div>
+        </div>
+
+        <div class="row">
+          <h2>Bad words</h2>
+          <ul id="badWords"> </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- <div class="col&#45;md&#45;4"> -->
+      <!--   <h2>Unique words</h2> -->
+      <!--   <ul id="unique"> </ul> -->
+      <!-- </div> -->
+
+    </div>
+    </div>
+  </body>
+</html>
