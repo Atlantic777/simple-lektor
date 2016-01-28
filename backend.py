@@ -12,6 +12,8 @@ app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
 CORS(app)
 
+personal_dict = []
+
 
 @app.route("/check", methods=['GET', 'POST'])
 def hello():
@@ -31,5 +33,23 @@ def hello():
 
         return json.dumps(response)
 
+
+@app.route("/limbo", methods=['GET', 'POST'])
+def limbo():
+    if request.method == 'GET':
+        return json.dumps(personal_dict)
+    elif request.method == 'POST':
+        data = request.form['words']
+        words = json.loads(data)
+        print words
+        print words[0]
+
+        for word in words:
+            if word not in personal_dict:
+                personal_dict.append(word)
+
+        return json.dumps(personal_dict)
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

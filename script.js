@@ -1,5 +1,6 @@
 var sorted = [];
 var dict = [];
+var limbo = [];
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -72,10 +73,38 @@ function check() {
 }
 
 function showSuggestions() {
-  console.log(this.innerHTML);
+  $("#selection").text(this.innerHTML);
+}
+
+function setLimboDict(data) {
+  $("#dict").text("");
+  limbo = JSON.parse(data);
+
+  $(limbo).each(function(i, word) {
+    $("#dict").append("<li>" + word + "</li>");
+  });
+}
+
+function addToLimbo() {
+  var selection = $("#selection").text();
+  console.log("Adding this to limbo: " + selection);
+
+  // post new word to limbo dict
+  $.post("http://localhost:5000/limbo",
+         { words: JSON.stringify([selection])})
+         .done(setLimboDict);
+
+  // read new limbo dict state
+  // trigger recheck
+}
+
+function clearSelection() {
+  $("#selection").text("");
 }
 
 $(document).ready(function() {
   $("#foo").on("click", check);
   $(document).on("click", ".wrong", showSuggestions);
+  $("#editor").on("click", clearSelection );
+  $("#add").on("click", addToLimbo);
 });
