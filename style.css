@@ -9,3 +9,7 @@
 .wrong {
   background-color: #EEAAAA;
 }
+
+.selected {
+  background-color: gray;
+}

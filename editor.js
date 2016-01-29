@@ -71,8 +71,9 @@ function check() {
 
   sorted = prepare(raw);
   // $(sorted).each(showWord);
-  $.post("http://localhost:5000/check", { wordlist: JSON.stringify(sorted) })
-    .done(markBadWords);
+  $.post("http://localhost:5000/limbo/"+current_user+"/check",
+         { wordlist: JSON.stringify(sorted) })
+      .done(markBadWords);
 }
 
 function showSuggestions() {
@@ -92,7 +93,7 @@ function addToLimbo() {
   var selection = $("#selection").text();
 
   // post new word to limbo dict
-  $.post("http://localhost:5000/limbo",
+  $.post("http://localhost:5000/limbo/"+current_user,
          { words: JSON.stringify([selection])})
          .done(setLimboDict);
 
@@ -114,6 +115,8 @@ function changeUser() {
   current_user = username;
   $("#user-chooser").text(current_user);
   user_selected = true;
+
+  fetchLimbo();
 }
 
 function fetchUsers() {
