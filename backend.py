@@ -6,7 +6,7 @@ import logging
 import enchant
 import json
 
-d = enchant.Dict("en")
+d = enchant.DictWithPWL("sh", "/tmp/personal.txt")
 
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
@@ -47,6 +47,7 @@ def limbo():
         for word in words:
             if word not in personal_dict:
                 personal_dict.append(word)
+                d.add(word)
 
         return json.dumps(personal_dict)
 

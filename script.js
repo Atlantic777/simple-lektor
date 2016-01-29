@@ -94,12 +94,15 @@ function addToLimbo() {
          { words: JSON.stringify([selection])})
          .done(setLimboDict);
 
-  // read new limbo dict state
-  // trigger recheck
+  check();
 }
 
 function clearSelection() {
   $("#selection").text("");
+}
+
+function fetchLimbo() {
+  $.get("http://localhost:5000/limbo").done(setLimboDict);
 }
 
 $(document).ready(function() {
@@ -107,4 +110,6 @@ $(document).ready(function() {
   $(document).on("click", ".wrong", showSuggestions);
   $("#editor").on("click", clearSelection );
   $("#add").on("click", addToLimbo);
+
+  fetchLimbo();
 });
