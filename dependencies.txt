@@ -1,0 +1,3 @@
+python-pip
+libenchant-dev
+hunspell-sh
