@@ -12,11 +12,20 @@ app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
 CORS(app)
 
-personal_dict = []
+personal_dicts = []
+user_list = []
 
 
-@app.route("/check", methods=['GET', 'POST'])
-def hello():
+def get_personal_dict(username):
+    path = "/tmp/{}.dic".format(username)
+    f = open(path, "r")
+    data = f.readlines()
+    f.close()
+    return data
+
+
+@app.route("/limbo/<username>/check/", methods=['GET', 'POST'])
+def check(username):
     if request.method == 'GET':
         return "Hello world"
     elif request.method == 'POST':
@@ -34,9 +43,10 @@ def hello():
         return json.dumps(response)
 
 
-@app.route("/limbo", methods=['GET', 'POST'])
-def limbo():
+@app.route("/limbo/<username>", methods=['GET', 'POST'])
+def limbo(username):
     if request.method == 'GET':
+        personal_dict = get_personal_dict(username)
         return json.dumps(personal_dict)
     elif request.method == 'POST':
         data = request.form['words']
@@ -50,6 +60,19 @@ def limbo():
                 d.add(word)
 
         return json.dumps(personal_dict)
+
+
+@app.route("/user", methods=['GET', 'POST'])
+def users():
+    if request.method == 'GET':
+        return json.dumps([{'name': username} for username in user_list])
+    elif request.method == 'POST':
+        name = request.form['username']
+
+        if name not in user_list:
+            user_list.append(name)
+
+        return ('', 204)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,9 @@
 var sorted = [];
 var dict = [];
 var limbo = [];
+var user_list = [];
+var current_user;
+var user_selected = false;
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -87,7 +90,6 @@ function setLimboDict(data) {
 
 function addToLimbo() {
   var selection = $("#selection").text();
-  console.log("Adding this to limbo: " + selection);
 
   // post new word to limbo dict
   $.post("http://localhost:5000/limbo",
@@ -102,7 +104,33 @@ function clearSelection() {
 }
 
 function fetchLimbo() {
-  $.get("http://localhost:5000/limbo").done(setLimboDict);
+  if(user_selected) {
+    $.get("http://localhost:5000/limbo/"+current_user).done(setLimboDict);
+  }
+}
+
+function changeUser() {
+  var username = $(this).text();
+  current_user = username;
+  $("#user-chooser").text(current_user);
+  user_selected = true;
+}
+
+function fetchUsers() {
+  $.get("http://localhost:5000/user").done(function(response) {
+    user_list = JSON.parse(response);
+
+    $("#user-list").text("");
+
+    for(var id in user_list) {
+      var html = "";
+      html += '<li><a class="user-entry" href="#">';
+      html += user_list[id].name;
+      html += '</a></li>';
+
+      $("#user-list").append(html);
+    }
+  });
 }
 
 $(document).ready(function() {
@@ -110,6 +138,8 @@ $(document).ready(function() {
   $(document).on("click", ".wrong", showSuggestions);
   $("#editor").on("click", clearSelection );
   $("#add").on("click", addToLimbo);
+  $(document).on('click', '.user-entry', changeUser);
 
   fetchLimbo();
+  fetchUsers();
 });

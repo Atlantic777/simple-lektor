@@ -3,7 +3,7 @@
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf8">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
-  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="editor.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 
   <!-- Latest compiled and minified CSS -->
@@ -19,7 +19,20 @@
   <body>
     <div class="container">
 
-      <h1>Hello world!</h1>
+    <div class="huge">
+      <span class="h1">Hello: </span>
+
+      <span class="dropdown">
+        <button id="user-chooser" class="btn btn-default" data-toggle="dropdown">
+          Select user <span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu" id="user-list">
+          <li><a class="user-entry" href="#">first</a></li>
+          <li><a class="user-entry" href="#">second</a></li>
+        </ul>
+      </span>
+    </div>
 
     <div class="row">
       <div class="col-md-8">
