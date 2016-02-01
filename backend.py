@@ -42,7 +42,8 @@ def check(username):
         response = []
         for word in [w for w in wordlist if len(w)]:
             if not (d.check(word) or personal_dicts[username].check(word)):
-                response.append(word)
+                sug = d.suggest(word)
+                response.append({'word': word, 'suggestions': sug})
 
         return json.dumps(response)
 

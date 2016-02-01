@@ -52,7 +52,7 @@ function markBadWords(data) {
   $("#badWords").text("");
 
   $(dict).each(function() {
-    var word = this;
+    var word = this.word;
     mark(word);
     $("#badWords").append("<li>"+word+"</li>");
   });
@@ -77,7 +77,14 @@ function check() {
 }
 
 function showSuggestions() {
-  $("#selection").text(this.innerHTML);
+  var word = this.innerHTML;
+  $("#selection").text(word);
+
+  for(var word_id in dict) {
+    if(dict[word_id].word === word) {
+      $("#sugestions").text(dict[word_id].suggestions);
+    }
+  }
 }
 
 function setLimboDict(data) {
