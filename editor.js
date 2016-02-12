@@ -81,8 +81,17 @@ function showSuggestions() {
   $("#selection").text(word);
 
   for(var word_id in dict) {
-    if(dict[word_id].word === word) {
-      $("#sugestions").text(dict[word_id].suggestions);
+    var entry = dict[word_id];
+
+    if(entry.word === word) {
+      var html = '';
+
+      for(var id in entry.suggestions) {
+        html += '<em>' + entry.suggestions[id] + '</em>, ';
+      }
+      $("#sugestions").html(html);
+
+      break;
     }
   }
 }
